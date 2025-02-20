@@ -1,4 +1,4 @@
-class BaseChatEngine:
+class BaseChat:
     def __init__(self, model_name):
         print(f"[INFO] using the model : {model_name}")
 

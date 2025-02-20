@@ -2,11 +2,11 @@ from openai import OpenAI
 import requests
 import os
 
-from . import BaseChatEngine
+from . import BaseChat
 
-class GPT(BaseChatEngine):
+class GPT(BaseChat):
     def __init__(self, 
-                 model_name = "o3-mini",
+                 model_name = "o3-mini-2025-01-31",
                  temperature = 0.7,
                  max_tokens = 100):
         super().__init__(model_name)
@@ -48,7 +48,7 @@ class GPT(BaseChatEngine):
         
         return output
 
-    def chat(self, chat_inputs: dict, raw_output = False):
+    def chat(self, chat_inputs: dict, raw_output = False, logprobs = None):
         # retrieve the inputs
         user_messages = chat_inputs.get("user", [])
         system_message = chat_inputs.get("system", None)
@@ -63,7 +63,8 @@ class GPT(BaseChatEngine):
             "model": self._model_name,  
             "messages": formatted_input,
             "temperature": self._temperature, 
-            "max_tokens": self._max_tokens
+            "max_tokens": self._max_tokens,
+            "logprobs" : logprobs
         }
 
         response = requests.post(self.url, headers = self.headers, json = data)
