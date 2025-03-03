@@ -1,2 +1,6 @@
 pandas
 openai
+datasets
+transformers
+evaluate
+torch

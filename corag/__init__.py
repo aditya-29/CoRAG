@@ -1,4 +1,6 @@
 from .prompts import prompts as Prompts
+from .prompts.task_description import Task
+from .chat.base_chat import BaseChat
 
 import os
 import yaml
